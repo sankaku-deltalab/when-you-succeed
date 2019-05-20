@@ -1,8 +1,9 @@
-import Vue from "vue";
+import Vue, { CreateElement, VNode } from "vue";
+import "./plugins/vuetify";
 import App from "./App.vue";
 
 Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App)
+  render: (h: CreateElement): VNode => h(App)
 }).$mount("#app");
