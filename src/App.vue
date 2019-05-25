@@ -45,6 +45,8 @@ body {
 
 #game-canvas {
   position: absolute;
+  top: 0px;
+  left: 0px;
   margin: 0px;
   padding: 0px;
   border: 0px;
