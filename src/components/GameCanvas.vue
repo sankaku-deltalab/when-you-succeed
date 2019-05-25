@@ -7,6 +7,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import InitialMenu from "./InitialMenu.vue";
+import { GameManager } from "../game/game-manager";
 
 @Component({ components: { InitialMenu } })
 export default class GameCanvas extends Vue {
@@ -18,6 +19,8 @@ export default class GameCanvas extends Vue {
     this.canvas = this.$refs.canvas as HTMLCanvasElement;
     this.canvas.width = w;
     this.canvas.height = h;
+
+    new GameManager(this.canvas);
   }
 }
 </script>
