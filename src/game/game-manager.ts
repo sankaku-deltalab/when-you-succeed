@@ -29,6 +29,7 @@ export class GameManager {
       canvasElementId: "__anyId",
       pointerScope: ex.Input.PointerScope.Canvas,
       backgroundColor: ex.Color.DarkGray,
+      suppressMinimumBrowserFeatureDetection: true,
       suppressConsoleBootMessage: true
     });
 
