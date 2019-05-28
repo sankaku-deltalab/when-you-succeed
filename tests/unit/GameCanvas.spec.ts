@@ -1,11 +1,11 @@
-import { mount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 import GameCanvas from "@/components/GameCanvas.vue";
 import "../test-setup";
 
 describe("GameCanvas", (): void => {
   it("renders window sized canvas", (): void => {
     // Given mounted GameCanvas
-    const wrapper = mount(GameCanvas);
+    const wrapper = shallowMount(GameCanvas);
 
     // Then renders window sized canvas
     const canvas = wrapper.find("canvas").element as HTMLCanvasElement;
