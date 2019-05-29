@@ -20,7 +20,8 @@ export default class GameCanvas extends Vue {
     this.canvas.width = w;
     this.canvas.height = h;
 
-    new GameManager(this.canvas);
+    const game = new GameManager(this.canvas);
+    game.start();
   }
 }
 </script>
