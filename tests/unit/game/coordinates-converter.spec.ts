@@ -42,7 +42,7 @@ describe("CoordinatesConverter", (): void => {
       // Given CoordinatesConverter
       const cc = new CoordinatesConverter({
         areaSizeInCanvas: 1,
-        visualAreaSizeInCanvas: { x: 1, y: 1 },
+        visualAreaSizeInCanvas: { x: 2, y: 3 },
         centerInCanvas: { x: 150 + offsetX, y: 200 + offsetY }
       });
 

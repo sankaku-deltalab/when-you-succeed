@@ -23,17 +23,15 @@ export class CoordinatesConverter {
   private readonly visualAreaToCanvasTrans: mat.Matrix;
 
   public constructor(args: CoordinatesConverterArgs) {
-    const areaToCanvasTransWithoutScale = mat.transform(
+    this.areaToCanvasTrans = mat.transform(
       mat.translate(...pointToArray(args.centerInCanvas)),
+      mat.scale(args.areaSizeInCanvas),
       mat.rotateDEG(-90)
     );
-    this.areaToCanvasTrans = mat.transform(
-      mat.scale(args.areaSizeInCanvas),
-      areaToCanvasTransWithoutScale
-    );
     this.visualAreaToCanvasTrans = mat.transform(
+      mat.translate(...pointToArray(args.centerInCanvas)),
       mat.scale(...pointToArray(args.visualAreaSizeInCanvas)),
-      areaToCanvasTransWithoutScale
+      mat.rotateDEG(-90)
     );
   }
 
