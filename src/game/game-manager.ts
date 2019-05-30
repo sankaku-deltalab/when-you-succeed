@@ -2,6 +2,7 @@ import * as ex from "excalibur";
 import { CoordinatesConverter } from "./coordinates-converter";
 import { STGFlow } from "./game-flow/stg-flow";
 import { Character } from "./character";
+import { PlayerInput } from "./player-input";
 
 export class GameManager {
   private readonly canvas: HTMLCanvasElement;
@@ -25,7 +26,8 @@ export class GameManager {
       engine: this.engine,
       scene: new ex.Scene(this.engine),
       playerCharacter: pc,
-      coordinatesConverter: this.cc
+      coordinatesConverter: this.cc,
+      playerInput: new PlayerInput(this.cc)
     });
 
     stgFlow.start();

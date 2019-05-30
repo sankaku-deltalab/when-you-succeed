@@ -1,4 +1,5 @@
 import * as mat from "transformation-matrix";
+import * as ex from "excalibur";
 
 const pointToArray = (p: mat.Point): [number, number] => [p.x, p.y];
 
@@ -38,27 +39,53 @@ export class CoordinatesConverter {
   /**
    * Convert area point to canvas point.
    *
-   * @param pointInField Point in square field
+   * @param pointInArea Point in square area
    */
-  public toCanvasPoint(pointInField: mat.Point): mat.Point {
-    return mat.applyToPoint(this.areaToCanvasTrans, pointInField);
+  public toCanvasPoint(pointInArea: mat.Point): mat.Point {
+    return mat.applyToPoint(this.areaToCanvasTrans, pointInArea);
   }
 
   /**
    * Convert area point to canvas point.
    *
-   * @param pointInVisualField Point in square field
+   * @param pointInVisualArea Point in square field
    */
-  public toCanvasPointFromVisualArea(pointInVisualField: mat.Point): mat.Point {
-    return mat.applyToPoint(this.visualAreaToCanvasTrans, pointInVisualField);
+  public toCanvasPointFromVisualArea(pointInVisualArea: mat.Point): mat.Point {
+    return mat.applyToPoint(this.visualAreaToCanvasTrans, pointInVisualArea);
   }
 
   /**
    * Convert canvas point to area point.
    *
-   * @param pointInCanvas Point in square field
+   * @param pointInCanvas Point in canvas
    */
   public toAreaPoint(pointInCanvas: mat.Point): mat.Point {
     return mat.applyToPoint(mat.inverse(this.areaToCanvasTrans), pointInCanvas);
+  }
+
+  /**
+   * Convert canvas point to visual area point.
+   *
+   * @param pointInCanvas Point in canvas
+   */
+  public toVisualAreaPoint(pointInCanvas: mat.Point): mat.Point {
+    return mat.applyToPoint(
+      mat.inverse(this.visualAreaToCanvasTrans),
+      pointInCanvas
+    );
+  }
+
+  /**
+   * Clamp canvas point in visual area.
+   *
+   * @param pointInCanvas Point in canvas
+   */
+  public clampCanvasPointInVisualArea(pointInCanvas: mat.Point): mat.Point {
+    const pointInVisualArea = this.toVisualAreaPoint(pointInCanvas);
+    const pointInVisualAreaClamped = {
+      x: ex.Util.clamp(pointInVisualArea.x, -0.5, 0.5),
+      y: ex.Util.clamp(pointInVisualArea.y, -0.5, 0.5)
+    };
+    return this.toCanvasPointFromVisualArea(pointInVisualAreaClamped);
   }
 }

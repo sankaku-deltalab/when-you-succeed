@@ -132,4 +132,39 @@ describe("CoordinatesConverter", (): void => {
       expect(areaPoint.y).toBeCloseTo(areaY);
     }
   );
+
+  it.each`
+    posX   | posY   | visualAreaSizeX | visualAreaSizeY | centerInCanvasX | centerInCanvasY | clampedPosX | clampedPosY
+    ${50}  | ${50}  | ${100}          | ${100}          | ${50}           | ${50}           | ${50}       | ${50}
+    ${100} | ${100} | ${100}          | ${100}          | ${50}           | ${50}           | ${100}      | ${100}
+    ${101} | ${100} | ${100}          | ${100}          | ${50}           | ${50}           | ${100}      | ${100}
+    ${100} | ${101} | ${100}          | ${100}          | ${50}           | ${50}           | ${100}      | ${100}
+  `(
+    "can clamp canvas point in visual area",
+    ({
+      posX,
+      posY,
+      visualAreaSizeX,
+      visualAreaSizeY,
+      centerInCanvasX,
+      centerInCanvasY,
+      clampedPosX,
+      clampedPosY
+    }): void => {
+      // Given CoordinatesConverter
+      const cc = new CoordinatesConverter({
+        areaSizeInCanvas: 1,
+        visualAreaSizeInCanvas: { x: visualAreaSizeX, y: visualAreaSizeY },
+        centerInCanvas: { x: centerInCanvasX, y: centerInCanvasY }
+      });
+
+      // When clamp position
+      const canvasPoint = { x: posX, y: posY };
+      const clampedPoint = cc.clampCanvasPointInVisualArea(canvasPoint);
+
+      // Then get clamped point
+      expect(clampedPoint.x).toBeCloseTo(clampedPosX);
+      expect(clampedPoint.y).toBeCloseTo(clampedPosY);
+    }
+  );
 });
