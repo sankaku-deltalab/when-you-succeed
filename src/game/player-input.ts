@@ -36,6 +36,11 @@ export class PlayerInput {
         throw new Error("Pointer down event is not exist");
       this.pointerDownAt(ev.pos);
     });
+    engineInput.pointers.primary.on("up", (ev): void => {
+      if (!(ev instanceof ex.Input.PointerEvent))
+        throw new Error("Pointer up event is not exist");
+      this.pointerUp();
+    });
     engineInput.pointers.primary.on("move", (ev): void => {
       if (!(ev instanceof ex.Input.PointerEvent))
         throw new Error("Pointer move event is not exist");
@@ -55,7 +60,7 @@ export class PlayerInput {
   /**
    * Notify pointer up.
    */
-  public pointerUpAt(): void {
+  public pointerUp(): void {
     this.oldTouchPosition = null;
   }
 

@@ -74,6 +74,36 @@ describe("PlayerInput", (): void => {
     expect(pc.actor.pos).toEqual(initialActorPos.add(delta));
   });
 
+  it("do not move player character when upped pointer moved", (): void => {
+    // Given character as player character
+    const initialActorPos = new ex.Vector(80, 90);
+    const pc = createMockCharacter();
+    pc.actor.pos = initialActorPos;
+
+    // And CoordinatesConverter
+    const cc = createMockCoordinatesConverter();
+
+    // And construct PlayerInput
+    const playerInput = new PlayerInput(cc);
+
+    // When set player character
+    playerInput.setPlayerCharacter(pc);
+
+    // And down pointer
+    const downPos = new ex.Vector(5, 6);
+    playerInput.pointerDownAt(downPos);
+
+    // And up pointer
+    playerInput.pointerUp();
+
+    // And move pointer
+    const moveDest = new ex.Vector(7, 8);
+    playerInput.pointerMoveTo(moveDest);
+
+    // Then character was not moved
+    expect(pc.actor.pos).toEqual(initialActorPos);
+  });
+
   it("move player character in visual area", (): void => {
     // Given character as player character
     const initialActorPos = new ex.Vector(0, 1);
