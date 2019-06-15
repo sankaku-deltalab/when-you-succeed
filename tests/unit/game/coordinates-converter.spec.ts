@@ -36,50 +36,44 @@ describe("CoordinatesConverter", (): void => {
     ${7}    | ${8}
     ${-9}   | ${-10}
     ${1.25} | ${1.5}
-  `(
-    "use translation with centerInCanvas",
-    ({ offsetX, offsetY }): void => {
-      // Given CoordinatesConverter
-      const cc = new CoordinatesConverter({
-        areaSizeInCanvas: 1,
-        visualAreaSizeInCanvas: { x: 2, y: 3 },
-        centerInCanvas: { x: 150 + offsetX, y: 200 + offsetY }
-      });
+  `("use translation with centerInCanvas", ({ offsetX, offsetY }): void => {
+    // Given CoordinatesConverter
+    const cc = new CoordinatesConverter({
+      areaSizeInCanvas: 1,
+      visualAreaSizeInCanvas: { x: 2, y: 3 },
+      centerInCanvas: { x: 150 + offsetX, y: 200 + offsetY }
+    });
 
-      // When convert center point
-      const centerInField = { x: 0, y: 0 };
-      const convertedCenter = cc.toCanvasPointFromVisualArea(centerInField);
+    // When convert center point
+    const centerInField = { x: 0, y: 0 };
+    const convertedCenter = cc.toCanvasPointFromVisualArea(centerInField);
 
-      // Then get center of canvas
-      expect(convertedCenter.x).toBeCloseTo(150 + offsetX);
-      expect(convertedCenter.y).toBeCloseTo(200 + offsetY);
-    }
-  );
+    // Then get center of canvas
+    expect(convertedCenter.x).toBeCloseTo(150 + offsetX);
+    expect(convertedCenter.y).toBeCloseTo(200 + offsetY);
+  });
 
   it.each`
     areaSizeInCanvas
     ${100}
     ${200}
     ${500}
-  `(
-    "use scaling with areaSizeInCanvas area",
-    ({ areaSizeInCanvas }): void => {
-      // Given CoordinatesConverter
-      const cc = new CoordinatesConverter({
-        areaSizeInCanvas,
-        visualAreaSizeInCanvas: { x: 1, y: 1 },
-        centerInCanvas: { x: 0, y: 0 }
-      });
+  `("use scaling with areaSizeInCanvas area", ({ areaSizeInCanvas }): void => {
+    // Given CoordinatesConverter
+    const cc = new CoordinatesConverter({
+      areaSizeInCanvas,
+      visualAreaSizeInCanvas: { x: 1, y: 1 },
+      centerInCanvas: { x: 0, y: 0 }
+    });
 
-      // When convert south east point
-      const seInArea = { x: -0.5, y: 0.5 };
-      const convertedSE = cc.toCanvasPoint(seInArea);
+    // When convert south east point
+    const seInArea = { x: -0.5, y: 0.5 };
+    const convertedSE = cc.toCanvasPoint(seInArea);
 
-      // Then get center of canvas
-      expect(convertedSE.x).toBeCloseTo(areaSizeInCanvas / 2);
-      expect(convertedSE.y).toBeCloseTo(areaSizeInCanvas / 2);
-    }
-  );
+    // Then get center of canvas
+    expect(convertedSE.x).toBeCloseTo(areaSizeInCanvas / 2);
+    expect(convertedSE.y).toBeCloseTo(areaSizeInCanvas / 2);
+  });
 
   it.each`
     areaSizeInCanvasX | areaSizeInCanvasY

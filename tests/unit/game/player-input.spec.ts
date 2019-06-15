@@ -14,11 +14,9 @@ const createMockEngineInput = (): ex.Input.EngineInput => {
 };
 
 const createMockCharacter = (): Character => {
-  const characterClass = jest.fn(
-    (): { actor: ex.Actor } => ({
-      actor: simpleMock<ex.Actor>()
-    })
-  );
+  const characterClass = jest.fn((): { actor: ex.Actor } => ({
+    actor: simpleMock<ex.Actor>()
+  }));
   return new characterClass() as Character;
 };
 

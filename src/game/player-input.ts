@@ -31,22 +31,16 @@ export class PlayerInput {
    * @param engineInput
    */
   public enableInput(engineInput: ex.Input.EngineInput): void {
-    engineInput.pointers.primary.on(
-      "down",
-      (ev): void => {
-        if (!(ev instanceof ex.Input.PointerEvent))
-          throw new Error("Pointer down event is not exist");
-        this.pointerDownAt(ev.pos);
-      }
-    );
-    engineInput.pointers.primary.on(
-      "move",
-      (ev): void => {
-        if (!(ev instanceof ex.Input.PointerEvent))
-          throw new Error("Pointer move event is not exist");
-        this.pointerMoveTo(ev.pos);
-      }
-    );
+    engineInput.pointers.primary.on("down", (ev): void => {
+      if (!(ev instanceof ex.Input.PointerEvent))
+        throw new Error("Pointer down event is not exist");
+      this.pointerDownAt(ev.pos);
+    });
+    engineInput.pointers.primary.on("move", (ev): void => {
+      if (!(ev instanceof ex.Input.PointerEvent))
+        throw new Error("Pointer move event is not exist");
+      this.pointerMoveTo(ev.pos);
+    });
   }
 
   /**
