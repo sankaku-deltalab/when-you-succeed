@@ -1,18 +1,15 @@
 <template>
   <div id="app">
-    <GameRoot id="game-canvas" />
-    <UIRoot id="ui-root" />
+    <GameRoot key="game-root" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import UIRoot from "./components/UIRoot.vue";
 import GameRoot from "./components/GameRoot.vue";
 
 @Component({
   components: {
-    UIRoot,
     GameRoot
   }
 })

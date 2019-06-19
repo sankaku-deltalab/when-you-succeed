@@ -1,15 +1,16 @@
 <template>
   <span>
     <canvas ref="canvas" class="game-canvas"></canvas>
+    <UIRoot key="ui-root" />
   </span>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import InitialMenu from "./InitialMenu.vue";
+import UIRoot from "./UIRoot.vue";
 import { GameManager } from "../game/game-manager";
 
-@Component({ components: { InitialMenu } })
+@Component({ components: { UIRoot } })
 export default class GameRoot extends Vue {
   private canvas!: HTMLCanvasElement;
 
