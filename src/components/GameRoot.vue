@@ -10,7 +10,7 @@ import InitialMenu from "./InitialMenu.vue";
 import { GameManager } from "../game/game-manager";
 
 @Component({ components: { InitialMenu } })
-export default class GameCanvas extends Vue {
+export default class GameRoot extends Vue {
   private canvas!: HTMLCanvasElement;
 
   public mounted() {

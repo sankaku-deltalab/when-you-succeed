@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <GameCanvas id="game-canvas" />
+    <GameRoot id="game-canvas" />
     <UIRoot id="ui-root" />
   </div>
 </template>
@@ -8,12 +8,12 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import UIRoot from "./components/UIRoot.vue";
-import GameCanvas from "./components/GameCanvas.vue";
+import GameRoot from "./components/GameRoot.vue";
 
 @Component({
   components: {
     UIRoot,
-    GameCanvas
+    GameRoot
   }
 })
 export default class App extends Vue {}
