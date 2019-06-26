@@ -1,5 +1,6 @@
 import { mount } from "@vue/test-utils";
 import InitialMenu from "@/components/InitialMenu.vue";
+import { InitialMenuManager } from "@/game/ui-manager";
 import "../test-setup";
 
 describe("InitialMenu.vue", (): void => {
@@ -11,14 +12,18 @@ describe("InitialMenu.vue", (): void => {
     expect(wrapper.contains("button")).toBe(true);
   });
 
-  it("emit start game event when button was clicked", (): void => {
+  it("finish flow when button pressed", async (): Promise<void> => {
     // Given mounted InitialMenu
     const wrapper = mount(InitialMenu);
+    const menu = wrapper.vm as InitialMenuManager;
 
-    // When click button
+    // When play flow
+    const flow = menu.playInitialMenu();
+
+    // And click button
     wrapper.find("button").trigger("click");
 
-    // Then start event was emit
-    expect(wrapper.emitted()["start-game"]).toBeTruthy();
+    // Then flow was finished
+    await flow; // If flow was finished, then Promise was not ended
   });
 });
