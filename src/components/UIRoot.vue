@@ -1,27 +1,21 @@
 <template>
-  <div>
-    <v-slide-x-reverse-transition>
-      <InitialMenu
-        v-on:start-game="menu = MenuMode.noMenu"
-        v-show="menu === MenuMode.initialMenu"
-      />
-    </v-slide-x-reverse-transition>
-  </div>
+  <span>
+    <InitialMenu ref="initial-menu" />
+  </span>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import InitialMenu from "./InitialMenu.vue";
-
-enum MenuMode {
-  noMenu = "noMenu",
-  initialMenu = "initialMenu"
-}
+import { InitialMenuManager } from "@/game/ui-manager";
 
 @Component({ components: { InitialMenu } })
 export default class UIRoot extends Vue {
-  private MenuMode = MenuMode;
-  private menu: MenuMode = MenuMode.initialMenu;
+  public initialMenuManager!: InitialMenuManager;
+
+  public mounted(): void {
+    this.initialMenuManager = this.$refs["initial-menu"] as InitialMenu;
+  }
 }
 </script>
 

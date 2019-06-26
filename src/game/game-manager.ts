@@ -1,36 +1,17 @@
 import * as ex from "excalibur";
 import { CoordinatesConverter } from "./coordinates-converter";
-import { STGFlow } from "./game-flow/stg-flow";
-import { Character } from "./character";
-import { PlayerInput } from "./player-input";
 
 export class GameManager {
   private readonly canvas: HTMLCanvasElement;
-  private readonly engine: ex.Engine;
-  private readonly cc: CoordinatesConverter;
+  public readonly engine: ex.Engine;
+  public readonly coordinatesConverter: CoordinatesConverter;
 
   public constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
+
     this.engine = this.createEngine(canvas);
-    this.cc = this.createCoordinatesConverter(this.engine);
+    this.coordinatesConverter = this.createCoordinatesConverter(this.engine);
     this.engine.start();
-  }
-
-  /**
-   * Start game.
-   */
-  public start(): void {
-    const pc = this.createPlayerCharacter(this.cc);
-
-    const stgFlow = new STGFlow({
-      engine: this.engine,
-      scene: new ex.Scene(this.engine),
-      playerCharacter: pc,
-      coordinatesConverter: this.cc,
-      playerInput: new PlayerInput(this.cc)
-    });
-
-    stgFlow.start();
   }
 
   /**
@@ -77,21 +58,6 @@ export class GameManager {
       areaSizeInCanvas: areaSize,
       visualAreaSizeInCanvas: visualAreaSize,
       centerInCanvas: areaCenter
-    });
-  }
-
-  private createPlayerCharacter(cc: CoordinatesConverter): Character {
-    const pcLoc = { x: -0.25, y: 0 };
-    const pcLocCanvas = cc.toCanvasPoint(pcLoc);
-    const pcActor = new ex.Actor({
-      width: 50,
-      height: 50,
-      color: ex.Color.Cyan,
-      ...pcLocCanvas
-    });
-    return new Character({
-      actor: pcActor,
-      coordinatesConverter: cc
     });
   }
 }
